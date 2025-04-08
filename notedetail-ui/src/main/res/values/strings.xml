@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit">Edit</string>
+    <string name="note_detail">Note Detail</string>
+    <string name="delete_icon">Delete Icon</string>
+    <string name="note_updated">Note is updated!</string>
+    <string name="note_deleted">Note is deleted!</string>
+</resources>
