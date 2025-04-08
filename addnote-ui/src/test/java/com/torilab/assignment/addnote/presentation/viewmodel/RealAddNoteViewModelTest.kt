@@ -103,7 +103,6 @@ class RealAddNoteViewModelTest : ScopeTestable by RealScopeTestable() {
                 AddNoteScreenState("title"),
                 AddNoteScreenState("title", "description"),
                 AddNoteScreenState("title", "description", AddNoteDisplayState.Loading),
-                AddNoteScreenState("title", "description", AddNoteDisplayState.Input),
             ),
             stateObserver.getValues(),
         )

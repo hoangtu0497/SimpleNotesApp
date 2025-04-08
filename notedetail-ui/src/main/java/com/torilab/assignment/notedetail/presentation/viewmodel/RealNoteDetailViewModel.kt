@@ -42,7 +42,13 @@ internal class RealNoteDetailViewModel(
                             titleText = note.title,
                             descriptionText = note.note,
                             note = note,
-                            displayState = NoteDetailDisplayState.Detail,
+                            displayState = if (currentNoteModel == null) {
+                                // Initial load
+                                NoteDetailDisplayState.Detail
+                            } else {
+                                // After updating ==> we're gonna navigate right away, no need to change state.
+                                it.displayState
+                            },
                         )
                     }
                 }
@@ -81,10 +87,7 @@ internal class RealNoteDetailViewModel(
 
             updateDisplayState(NoteDetailDisplayState.Loading)
             updateNote(updatedNoteModel).foldSuspend(
-                success = {
-                    eventDelegate.sendEvent(NoteDetailScreenEvent.UpdateNoteSuccessfully(noteId))
-                    setEditing(false)
-                },
+                success = { eventDelegate.sendEvent(NoteDetailScreenEvent.UpdateNoteSuccessfully(noteId)) },
                 error = {
                     eventDelegate.sendEvent(NoteDetailScreenEvent.Error(mapErrorToErrorStringRes(it)))
                     setEditing(true)

@@ -34,9 +34,11 @@ internal class RealAddNoteViewModel(
             val note = with(state.value) { Note(title = titleText, note = descriptionText) }
             addNote(note).foldSuspend(
                 success = { eventDelegate.sendEvent(AddNoteScreenEvent.SuccessfullyAdded(it.toInt())) },
-                error = { eventDelegate.sendEvent(AddNoteScreenEvent.Error(mapErrorToErrorStringRes(it))) },
+                error = {
+                    eventDelegate.sendEvent(AddNoteScreenEvent.Error(mapErrorToErrorStringRes(it)))
+                    updateDisplayState(AddNoteDisplayState.Input)
+                },
             )
-            updateDisplayState(AddNoteDisplayState.Input)
         }
     }
 
